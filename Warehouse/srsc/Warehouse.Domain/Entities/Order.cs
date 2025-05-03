@@ -2,15 +2,15 @@
 
 namespace Warehouse.Domain.Entities;
 
-public class Warehouse : IAuditable, IEntityId<long>
+public class Order : IAuditable, IEntityId<long>
 {
     public long Id { get; set; }
     
-    public required string Name { get; set; }
+    public User User { get; set; }
     
-    public required string Address { get; set; }
+    public long UserId { get; set; }
     
-    public required string Type { get; set; }
+    public List<OrderItem> OrderItems { get; set; }
     
     public DateTime CreatedAt { get; set; }
     

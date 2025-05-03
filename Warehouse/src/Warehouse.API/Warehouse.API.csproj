@@ -4,11 +4,18 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>bae89cf4-4b3c-4bc2-98c1-8033a5c19a94</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.15"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\srsc\Warehouse.Domain\Warehouse.Domain.csproj" />
+      <ProjectReference Include="..\Warehouse.Application\Warehouse.Application.csproj" />
+      <ProjectReference Include="..\Warehouse.DAL\Warehouse.DAL.csproj" />
     </ItemGroup>
 
 </Project>
