@@ -12,7 +12,7 @@ public interface IWarehouseService
     /// Получение всех имеющихся складов
     /// </summary>
     /// <returns></returns>
-    Task<CollectionResult<IEnumerable<WarehouseDto>>> GetWarehousesAsync();
+    Task<CollectionResult<WarehouseDto>> GetWarehousesAsync();
     
     /// <summary>
     /// Получение склада по его идентификатору

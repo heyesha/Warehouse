@@ -2,5 +2,6 @@
 
 public enum ErrorCodes
 {
+    ReportsNotFound = 0,
     
 }
