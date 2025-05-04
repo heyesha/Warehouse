@@ -60,6 +60,24 @@ namespace Warehouse.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Такой товар уже существует.
+        /// </summary>
+        internal static string ProductAlreadyExists {
+            get {
+                return ResourceManager.GetString("ProductAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Товар не найден.
+        /// </summary>
+        internal static string ProductNotFound {
+            get {
+                return ResourceManager.GetString("ProductNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Такой склад уже существует.
         /// </summary>
         internal static string WarehouseAlreadyExists {

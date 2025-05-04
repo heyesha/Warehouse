@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Warehouse.DAL.Interceptors;
 using Warehouse.DAL.Repositories;
+using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interfaces.Repositories;
 
 namespace Warehouse.DAL.DependencyInjection;
@@ -24,5 +25,7 @@ public static class DependencyInjection
     public static void InitRepositories(this IServiceCollection services)
     {
         services.AddScoped<IBaseRepository<Domain.Entities.Warehouse>, BaseRepository<Domain.Entities.Warehouse>>();
+        services.AddScoped<IBaseRepository<Product>, BaseRepository<Product>>();
+
     }
 }

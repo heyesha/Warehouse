@@ -17,4 +17,10 @@
     <data name="WarehouseAlreadyExists" xml:space="preserve">
         <value>Warehouse already exists</value>
     </data>
+    <data name="ProductNotFound" xml:space="preserve">
+        <value>Product not found</value>
+    </data>
+    <data name="ProductAlreadyExists" xml:space="preserve">
+        <value>Product already exists</value>
+    </data>
 </root>

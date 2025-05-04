@@ -17,4 +17,10 @@
     <data name="WarehouseAlreadyExists" xml:space="preserve">
         <value>Такой склад уже существует</value>
     </data>
+    <data name="ProductNotFound" xml:space="preserve">
+        <value>Товар не найден</value>
+    </data>
+    <data name="ProductAlreadyExists" xml:space="preserve">
+        <value>Такой товар уже существует</value>
+    </data>
 </root>
