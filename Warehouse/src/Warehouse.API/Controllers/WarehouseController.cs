@@ -6,7 +6,7 @@ using Warehouse.Domain.Result;
 namespace Warehouse.API.Controllers;
 
 [ApiController]
-[Route("/api/[controller]/warehouses")]
+[Route("/api/[controller]")]
 public class WarehouseController : ControllerBase
 {
     private readonly IWarehouseService _warehouseService;

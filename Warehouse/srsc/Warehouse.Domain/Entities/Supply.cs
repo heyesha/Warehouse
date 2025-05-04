@@ -10,6 +10,10 @@ public class Supply : IEntityId<long>, IAuditable
     
     public Warehouse Warehouse { get; set; }
     
+    public string? Destination { get; set; }
+    
+    public string? Description { get; set; }
+    
     public List<Product> Products { get; set; }
     
     public DateTime? CreatedAt { get; set; }

@@ -33,12 +33,34 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         {
             new Product()
             {
-                Id = 3,
+                Id = 4,
                 Name = "Apple",
                 Category = "Fruit",
                 ArticleNumber = "12345",
                 Price = (decimal)9.99,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = 0
+            },
+            new Product()
+            {
+                Id = 2,
+                Name = "Banana",
+                Category = "Fruit",
+                ArticleNumber = "adfg",
+                Price = (decimal)4.5,
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = 0
+            }
+            , 
+            new Product()
+            {
+                Id = 1,
+                Name = "Phone",
+                Category = "Device",
+                ArticleNumber = "fgxv",
+                Price = (decimal)199.00,
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = 0
             }
         });
     }

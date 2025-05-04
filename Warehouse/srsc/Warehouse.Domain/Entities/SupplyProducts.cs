@@ -8,11 +8,9 @@ public class SupplyProducts : IEntityId<long>
     
     public long ProductId { get; set; }
     
-    public Product Product { get; set; }
     
     public long SupplyId { get; set; }
     
-    public Supply Supply { get; set; }
     
     public int Amount { get; set; }
 }

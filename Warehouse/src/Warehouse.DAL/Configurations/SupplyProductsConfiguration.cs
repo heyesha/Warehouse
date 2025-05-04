@@ -9,5 +9,7 @@ public class SupplyProductsConfiguration : IEntityTypeConfiguration<SupplyProduc
     public void Configure(EntityTypeBuilder<SupplyProducts> builder)
     {
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        
+        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Warehouse.Application.Resources;
 using Warehouse.Domain.Dto;
+using Warehouse.Domain.Dto.Product;
 using Warehouse.Domain.Enums;
 using Warehouse.Domain.Interfaces.Repositories;
 using Warehouse.Domain.Interfaces.Services;
