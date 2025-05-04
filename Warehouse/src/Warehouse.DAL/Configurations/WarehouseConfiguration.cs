@@ -17,6 +17,11 @@ public class WarehouseConfiguration : IEntityTypeConfiguration<Domain.Entities.W
             .WithOne(x => x.Warehouse)
             .HasForeignKey(x => x.WarehouseId)
             .HasPrincipalKey(x => x.Id);
+        
+        builder.HasMany<Employee>(x => x.Employees)
+            .WithOne(x => x.Warehouse)
+            .HasForeignKey(x => x.WarehouseId)
+            .HasPrincipalKey(x => x.Id);
 
         builder.HasData(new List<Domain.Entities.Warehouse>()
         {

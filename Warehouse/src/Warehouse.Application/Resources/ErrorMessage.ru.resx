@@ -23,4 +23,7 @@
     <data name="ProductAlreadyExists" xml:space="preserve">
         <value>Такой товар уже существует</value>
     </data>
+    <data name="SuppliesNotFound" xml:space="preserve">
+        <value>Поставок не найдено</value>
+    </data>
 </root>

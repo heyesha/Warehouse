@@ -29,5 +29,9 @@ public static class DependencyInjection
         services.AddScoped<IBaseRepository<Supply>, BaseRepository<Supply>>();
         services.AddScoped<IBaseRepository<SupplyProducts>, BaseRepository<SupplyProducts>>();
         services.AddScoped<IBaseRepository<ProductWarehouse>, BaseRepository<ProductWarehouse>>();
+        services.AddScoped<IBaseRepository<Employee>, BaseRepository<Employee>>();
+        services.AddScoped<IBaseRepository<Achievement>, BaseRepository<Achievement>>();
+        services.AddScoped<IBaseRepository<EmployeeAchievement>, BaseRepository<EmployeeAchievement>>();
+        
     }
 }

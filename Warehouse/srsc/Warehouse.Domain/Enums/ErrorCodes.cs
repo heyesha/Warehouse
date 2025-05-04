@@ -7,4 +7,9 @@ public enum ErrorCodes
     
     ProductNotFound = 10,
     ProductAlreadyExists = 11,
+    
+    SuppliesNotFound = 20,
+    
+    EmployeeAlreadyExists = 30,
+    EmployeeNotFound = 31
 }

@@ -1,28 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Warehouse.Domain.Dto.Supply;
+using Warehouse.Domain.Dto.Employee;
+using Warehouse.Domain.Entities;
 using Warehouse.Domain.Interfaces.Services;
 using Warehouse.Domain.Result;
 
 namespace Warehouse.API.Controllers;
 
 [ApiController]
-[Route("/api/[controller]")]
-public class SupplyController : ControllerBase
+[Route("api/[controller]")]
+public class EmployeeController : ControllerBase
 {
-    private readonly ISupplyService _supplyService;
+    private readonly IEmployeeService _employeeService;
 
-    public SupplyController(ISupplyService supplyService)
+    public EmployeeController(IEmployeeService employeeService)
     {
-        _supplyService = supplyService;
+        _employeeService = employeeService;
     }
-    
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<BaseResult<SupplyDto>>> CreateSupply(
-        [FromBody] CreateSupplyDto supplyDto)
+    public async Task<ActionResult<BaseResult<EmployeeDto>>> CreateEmployee([FromBody] CreateEmployeeDto createEmployeeDto)
     {
-        var response = await _supplyService.CreateSupplyAsync(supplyDto);
+        var response = await _employeeService.CreateEmployee(createEmployeeDto);
         
         if (response.IsSuccess)
         {
@@ -31,12 +31,12 @@ public class SupplyController : ControllerBase
         return BadRequest(response);
     }
 
-    [HttpGet("{id:long}")]
+    [HttpGet("{count:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<BaseResult<SupplyDto>>> GetSupplyById(long id)
+    public async Task<ActionResult<CollectionResult<EmployeeDto>>> GetEmployee(int count)
     {
-        var response = await _supplyService.GetSupplyByIdAsync(id);
+        var response = await _employeeService.GetTopEmployees(count);
         
         if (response.IsSuccess)
         {
@@ -45,12 +45,12 @@ public class SupplyController : ControllerBase
         return BadRequest(response);
     }
 
-    [HttpGet("warehouse/{warehouseId:long}")]
+    [HttpPost("achievements")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<BaseResult<SupplyDto>>> GetSuppliesByWarehouse(long warehouseId)
+    public async Task<ActionResult<BaseResult<EmployeeDto>>> EarnPointsEmployee(EarnPointsDto earnPointsDto)
     {
-        var response = await _supplyService.GetSuppliesByWarehouse(warehouseId);
+        var response = await _employeeService.EarnPoints(earnPointsDto);
         
         if (response.IsSuccess)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Runtime.InteropServices.JavaScript;
+using Microsoft.EntityFrameworkCore;
 using Warehouse.Application.Resources;
 using Warehouse.Domain.Dto.Product;
 using Warehouse.Domain.Dto.Supply;
@@ -32,9 +33,24 @@ public class SupplyService : ISupplyService
         _productWarehouseRepository = productWarehouseRepository;
     }
 
-    public Task<BaseResult<SupplyDto>> GetSupplyByIdAsync(long id)
+    public async Task<BaseResult<SupplyDto>> GetSupplyByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var supply = await _supplyRepository.GetAll()
+            .FirstOrDefaultAsync(x => x.Id == id);
+
+        if (supply == null)
+        {
+            return new BaseResult<SupplyDto>()
+            {
+                ErrorMessage = ErrorMessage.SuppliesNotFound,
+                ErrorCode = (int)ErrorCodes.SuppliesNotFound,
+            };
+        }
+
+        return new BaseResult<SupplyDto>()
+        {
+            Data = new SupplyDto(supply.Id, supply.Description, supply.Destination),
+        };
     }
 
     public async Task<BaseResult<SupplyDto>> CreateSupplyAsync(CreateSupplyDto supplyDto)
@@ -104,13 +120,13 @@ public class SupplyService : ISupplyService
         await _productWarehouseRepository.SaveChangesAsync();
     }
 
-    public async Task<BaseResult<SupplyDto>> GetSuppliesByWarehouse(long warehouseId)
+    public async Task<CollectionResult<SupplyDto>> GetSuppliesByWarehouse(long warehouseId)
     {
         var warehouse = await _warehouseRepository.GetAll()
             .FirstOrDefaultAsync(x => x.Id == warehouseId);
         if (warehouse == null)
         {
-            return new BaseResult<SupplyDto>()
+            return new CollectionResult<SupplyDto>()
             {
                 ErrorMessage = ErrorMessage.WarehouseNotFound,
                 ErrorCode = (int)ErrorCodes.WarehouseNotFound
@@ -128,7 +144,13 @@ public class SupplyService : ISupplyService
             {
                 ErrorMessage = ErrorMessage.SuppliesNotFound,
                 ErrorCode = (int)ErrorCodes.SuppliesNotFound
-            }
+            };
         }
+
+        return new CollectionResult<SupplyDto>()
+        {
+            Data = supplies,
+            Count = supplies.Length
+        };
     }
 }

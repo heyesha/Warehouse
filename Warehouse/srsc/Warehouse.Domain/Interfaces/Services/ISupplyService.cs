@@ -27,5 +27,5 @@ public interface ISupplyService
     /// </summary>
     /// <param name="warehouseId"></param>
     /// <returns></returns>
-    Task<BaseResult<SupplyDto>> GetSuppliesByWarehouse(long warehouseId);
+    Task<CollectionResult<SupplyDto>> GetSuppliesByWarehouse(long warehouseId);
 }

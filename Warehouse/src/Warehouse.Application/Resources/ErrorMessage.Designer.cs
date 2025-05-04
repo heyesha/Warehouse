@@ -78,6 +78,15 @@ namespace Warehouse.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поставок не найдено.
+        /// </summary>
+        internal static string SuppliesNotFound {
+            get {
+                return ResourceManager.GetString("SuppliesNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Такой склад уже существует.
         /// </summary>
         internal static string WarehouseAlreadyExists {
