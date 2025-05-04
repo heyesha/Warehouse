@@ -12,7 +12,7 @@ public class Warehouse : IAuditable, IEntityId<long>
     
     public required string Type { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     public long CreatedBy { get; set; }
     

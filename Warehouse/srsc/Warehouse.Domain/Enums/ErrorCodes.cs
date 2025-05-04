@@ -2,6 +2,7 @@
 
 public enum ErrorCodes
 {
-    ReportsNotFound = 0,
+    WarehouseNotFound = 0,
+    WarehouseAlreadyExists = 1,
     
 }

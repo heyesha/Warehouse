@@ -12,7 +12,7 @@ public class Order : IAuditable, IEntityId<long>
     
     public List<OrderItem> OrderItems { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     public long CreatedBy { get; set; }
     

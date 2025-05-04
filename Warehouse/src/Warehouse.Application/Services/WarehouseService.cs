@@ -19,9 +19,7 @@ public class WarehouseService : IWarehouseService
 
     public async Task<CollectionResult<WarehouseDto>> GetWarehousesAsync()
     {
-        WarehouseDto[] warehouses;
-
-        warehouses = await _warehouseRepository.GetAll()
+        var warehouses = await _warehouseRepository.GetAll()
             .Select(x => new WarehouseDto(x.Id, x.Name, x.Address, x.Type))
             .ToArrayAsync();
 
@@ -29,8 +27,8 @@ public class WarehouseService : IWarehouseService
         {
             return new CollectionResult<WarehouseDto>()
             {
-                ErrorMessage = ErrorMessage.WarehouesNotFound,
-                ErrorCode = (int)ErrorCodes.ReportsNotFound
+                ErrorMessage = ErrorMessage.WarehouseNotFound,
+                ErrorCode = (int)ErrorCodes.WarehouseNotFound
             };
         }
 
@@ -43,21 +41,98 @@ public class WarehouseService : IWarehouseService
 
     public Task<BaseResult<WarehouseDto>> GetWarehouseByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var warehouseDto = _warehouseRepository.GetAll()
+            .AsEnumerable()
+            .Select(x => new WarehouseDto(x.Id, x.Name, x.Address, x.Type))
+            .FirstOrDefault(w => w.Id == id);
+
+        if (warehouseDto == null)
+        {
+            return Task.FromResult(new BaseResult<WarehouseDto>()
+            {
+                ErrorMessage = ErrorMessage.WarehouseNotFound,
+                ErrorCode = (int)ErrorCodes.WarehouseNotFound
+            });
+        }
+
+        return Task.FromResult(new BaseResult<WarehouseDto>()
+        {
+            Data = warehouseDto,
+        });
     }
 
-    public Task<BaseResult<WarehouseDto>> CreateWarehouseAsync(CreateWarehouseDto warehouse)
+    public async Task<BaseResult<WarehouseDto>> CreateWarehouseAsync(CreateWarehouseDto warehouseDto)
     {
-        throw new NotImplementedException();
+        var warehouse = await _warehouseRepository.GetAll().FirstOrDefaultAsync(w => w.Name == warehouseDto.Name);
+
+        if (warehouse != null)
+        {
+            return new BaseResult<WarehouseDto>()
+            {
+                ErrorMessage = ErrorMessage.WarehouseAlreadyExists,
+                ErrorCode = (int)ErrorCodes.WarehouseAlreadyExists
+            };
+        }
+
+        warehouse = new Domain.Entities.Warehouse()
+        {
+            Name = warehouseDto.Name,
+            Address = warehouseDto.Address,
+            Type = warehouseDto.Type
+        };
+        await _warehouseRepository.CreateAsync(warehouse);
+
+        return new BaseResult<WarehouseDto>()
+        {
+            Data = new WarehouseDto(warehouse.Id, warehouse.Name, warehouse.Address, warehouse.Type)
+        };
     }
 
-    public Task<BaseResult<WarehouseDto>> UpdateWarehouseAsync(UpdateWarehouseDto warehouse)
+    public async Task<BaseResult<WarehouseDto>> UpdateWarehouseAsync(UpdateWarehouseDto warehouseDto)
     {
-        throw new NotImplementedException();
+        var warehouse = await _warehouseRepository.GetAll().FirstOrDefaultAsync(w => w.Id == warehouseDto.Id);
+
+        if (warehouse == null)
+        {
+            return new BaseResult<WarehouseDto>()
+            {
+                ErrorMessage = ErrorMessage.WarehouseNotFound,
+                ErrorCode = (int)ErrorCodes.WarehouseNotFound
+            };
+        }
+        
+        warehouse.Name = warehouseDto.Name;
+        warehouse.Address = warehouseDto.Addres;
+        warehouse.Type = warehouseDto.Type;
+        
+        var updatedWarehouse = _warehouseRepository.Update(warehouse);
+        await _warehouseRepository.SaveChangesAsync();
+
+        return new BaseResult<WarehouseDto>()
+        {
+            Data = new WarehouseDto(updatedWarehouse.Id, updatedWarehouse.Name, updatedWarehouse.Address,
+                updatedWarehouse.Type)
+        };
     }
 
-    public Task<BaseResult<WarehouseDto>> DeleteWarehouseAsync(long id)
+    public async Task<BaseResult<WarehouseDto>> DeleteWarehouseAsync(long id)
     {
-        throw new NotImplementedException();
+        var warehouse = await _warehouseRepository.GetAll().FirstOrDefaultAsync(w => w.Id == id);
+        if (warehouse == null)
+        {
+            return new BaseResult<WarehouseDto>()
+            {
+                ErrorMessage = ErrorMessage.WarehouseNotFound,
+                ErrorCode = (int)ErrorCodes.WarehouseNotFound
+            };
+        }
+        
+        _warehouseRepository.Remove(warehouse);
+        await _warehouseRepository.SaveChangesAsync();
+
+        return new BaseResult<WarehouseDto>()
+        {
+            Data = new WarehouseDto(warehouse.Id, warehouse.Name, warehouse.Address, warehouse.Type)
+        };
     }
 }

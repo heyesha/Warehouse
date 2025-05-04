@@ -10,7 +10,7 @@ public class Employee : IAuditable, IEntityId<long>
     
     public required string Phone { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     public long CreatedBy { get; set; }
     

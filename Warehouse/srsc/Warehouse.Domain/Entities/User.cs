@@ -10,7 +10,7 @@ public class User : IAuditable, IEntityId<long>
     
     public required string Password { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     public long CreatedBy { get; set; }
     
