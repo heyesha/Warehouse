@@ -14,6 +14,8 @@ public class Warehouse : IAuditable, IEntityId<long>
     
     public List<Product> Products { get; set; }
     
+    public List<Supply> Supplies { get; set; }
+    
     public DateTime? CreatedAt { get; set; }
     
     public long CreatedBy { get; set; }

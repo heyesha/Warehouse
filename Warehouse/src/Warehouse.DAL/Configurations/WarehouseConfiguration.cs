@@ -11,5 +11,7 @@ public class WarehouseConfiguration : IEntityTypeConfiguration<Domain.Entities.W
         builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
         builder.Property(x => x.Address).IsRequired().HasMaxLength(50);
         builder.Property(x => x.Type).IsRequired().HasMaxLength(50);
+        
+        
     }
 }

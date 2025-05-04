@@ -22,6 +22,13 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
                 l => l.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId)
             );
 
+        builder.HasMany(x => x.Supplies)
+            .WithMany(x => x.Products)
+            .UsingEntity<SupplyProducts>(
+                l => l.HasOne<Supply>().WithMany().HasForeignKey(x => x.SupplyId),
+                l => l.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId)
+            );
+
         builder.HasData(new List<Product>()
         {
             new Product()

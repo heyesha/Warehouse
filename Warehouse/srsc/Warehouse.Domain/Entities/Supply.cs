@@ -2,13 +2,15 @@
 
 namespace Warehouse.Domain.Entities;
 
-public class Employee : IAuditable, IEntityId<long>
+public class Supply : IEntityId<long>, IAuditable
 {
     public long Id { get; set; }
     
-    public required string Name { get; set; }
+    public long WarehouseId { get; set; }
     
-    public required string Phone { get; set; }
+    public Warehouse Warehouse { get; set; }
+    
+    public List<Product> Products { get; set; }
     
     public DateTime? CreatedAt { get; set; }
     
